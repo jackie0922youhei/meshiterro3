@@ -1,4 +1,10 @@
 class ApplicationController < ActionController::Base
+  
+  # before_actionメソッドは、このコントローラが動作する前に実行されます。
+  # authenticate_userメソッドは、devise側が用意しているメソッドです。
+  # :authenticate_user!とすることによって、「ログイン認証されていなければ、ログイン画面へリダイレクトする」機能を実装できます。
+  before_action :authenticate_user!
+  
   # devise利用の機能（ユーザ登録、ログイン認証など）が使われる場合、その前にconfigure_permitted_parametersが実行される
   before_action :configure_permitted_parameters, if: :devise_controller?
 
