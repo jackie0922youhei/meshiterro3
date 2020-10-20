@@ -7,5 +7,8 @@ class PostImage < ApplicationRecord
   
   # 画像アップ用のメソッド（attachment）を追加してフィールド名に（image）を指定します。
   attachment :image
+  
+  # has_manyでPostCommentモデルを複数持つことを表しています。
+  has_many :post_comments, dependent: :destroy
 
 end
