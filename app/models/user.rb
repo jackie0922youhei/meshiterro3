@@ -10,5 +10,7 @@ class User < ApplicationRecord
   has_many :post_images, dependent: :destroy
   # Userモデルに、PostImageモデルとの関連付けを記述します。
   has_many :post_comments, dependent: :destroy
+  # Favoriteモデルのカラム（user_idとpost_image_id）は、UserモデルのidやPostImageモデルのidと関連付けが必要です。
+  has_many :favorites, dependent: :destroy
 
 end

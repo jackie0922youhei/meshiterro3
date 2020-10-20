@@ -16,8 +16,8 @@ class PostCommentsController < ApplicationController
     # PostComment.find_by(id: params[:id], post_image_id: params[:post_image_id]).destroy
     # post_image_id : 3
     # id : 1
-    @post_image = PostImage.find(params[:post_image_id])
-    @comment = @post_comments.find_by(id: params[:id])
+    @post_image = PostImage.find(id: params[:post_image_id])
+    @comment = PostComment.find(params[:id])
     @comment.destroy
     redirect_to post_image_path(@post_image.id)
   end

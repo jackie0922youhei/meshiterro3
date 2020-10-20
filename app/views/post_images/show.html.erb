@@ -34,10 +34,25 @@
                 <!--%Y、%m、%dは、日時のフォーマット指定によく使われます。-->
                 <%= @post_image.created_at.strftime('%Y/%m/%d') %>
               </li>
-              <li>
-                <i class="fa fa-heart"></i>
-                <a href="#">202 いいね</a>
-              </li>
+              <!--投稿画像に付けられた「いいね」に、自分（ログインしているユーザ）が含まれているかをfavorited_by?メソッドで判定しています。-->
+              <!--「含まれるとき／含まれないとき」で、表示と機能を分けています。-->
+              <!--iタグとFontAwesomeのclassで、ハートマークを表示してます。-->
+              <!--また、リンクのaタグのメソッドを、条件によって変えています。-->
+              <% if @post_image.favorited_by?(current_user) %>
+                <li>
+                  <%= link_to post_image_favorites_path(@post_image), method: :delete do %>
+                    <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+                    <%= @post_image.favorites.count %> いいね
+                  <% end %>
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to post_image_favorites_path(@post_image), method: :post do %>
+                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+                    <%= @post_image.favorites.count %> いいね
+                  <% end %>
+                </li>
+              <% end %>
               <li>
                 <i class="fa fa-comment"></i>
                 <a href="#comments">
